@@ -7,7 +7,4 @@ export default defineConfig({
     server:{
         cors: true,
     },
-    build: {
-        outDir: 'C:/Users/SkxWxlkxr/PycharmProjects/inventory/build',
-    },
 })
