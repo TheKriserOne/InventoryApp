@@ -56,6 +56,9 @@ const Store = () => {
 
     return (
         <>
+            {
+                console.log("Env:" + import.meta.env)
+            }
             <h1>Auto Parts Shop</h1>
             <Input className={"mb-4"} onChange={(e) => setSearch(e.target.value)} type={"search"}
                    placeholder={"Search"}/>
