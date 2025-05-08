@@ -75,6 +75,8 @@ const Store = () => {
                             >
                                 {item.images && (
                                     <CardImg
+                                        placeholder={"public/favicon.ico"}
+                                        loading={"lazy"}
                                         src={item.images[0]}
                                         alt={`${item.auto_part} image-${item.id}`}
                                         style={{

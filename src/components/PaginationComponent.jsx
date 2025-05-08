@@ -36,7 +36,7 @@ const PaginationComponent = ({
             ))}
             {/* Next page */}
             <PaginationItem disabled={currentPage === totalPages}>
-                <PaginationLink next onClick={() => onPageChange(currentPage + 1)}/>
+                <PaginationLink next onClick={() => {onPageChange(currentPage + 1)}}/>
             </PaginationItem>
         </Pagination>
     );
