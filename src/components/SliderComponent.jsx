@@ -1,34 +1,84 @@
-import React from "react";
-import Slider from "react-slick";
-import {CardImg} from "reactstrap";
+import React, { useState } from "react";
 
-const SliderComponent = ({arrOfImages}) => {
-    function Arrow({ direction, onClick }) {
-        return (
-            <div
-                className={`slider-arrow arrow-${direction}`}
-                onClick={onClick}
-            >
-                <i className={`bi bi-arrow-${direction}`}></i>
-            </div>
-        );
-    }
-    let settings = {
-        arrows: true,
-        adaptiveHeight: true,
-        dots: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        nextArrow: <Arrow direction="right" />,
-        prevArrow: <Arrow direction="left" />,
+import "../assets/scss/slider.css";
+
+function SliderComponent({ children }) {
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const slideNext = () => {
+        setActiveIndex((val) => {
+            if (val >= children.length - 1) {
+                return 0;
+            } else {
+                return val + 1;
+            }
+        });
     };
-    return <Slider className={"d-flex flex-row"} {...settings}>{arrOfImages.map((url, index) => (
-        <CardImg
-            key={index}
-            src={url}
-            alt={`image ${index + 1}`}
-        />
-        ))}</Slider>
+
+    const slidePrev = () => {
+        setActiveIndex((val) => {
+            if (val <= 0) {
+                return children.length - 1;
+            } else {
+                return val - 1;
+            }
+        });
+    };
+
+    return (
+        <div
+            className="container__slider"
+        >
+            {children.map((item, index) => {
+                return (
+                    <div
+                        className={"slider__item slider__item-active-" + (activeIndex + 1)}
+                        key={index}
+                    >
+                        {item}
+                    </div>
+                );
+            })}
+
+            <div className="container__slider__links">
+                {children.map((item, index) => {
+                    return (
+                        <button
+                            key={index}
+                            className={
+                                activeIndex === index
+                                    ? "container__slider__links-small container__slider__links-small-active"
+                                    : "container__slider__links-small"
+                            }
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setActiveIndex(index);
+                            }}
+                        ></button>
+                    );
+                })}
+            </div>
+
+            <button
+                className="h-100, slider__btn-next"
+                onClick={(e) => {
+                    e.preventDefault();
+                    slideNext();
+                }}
+            >
+                {">"}
+            </button>
+            <button
+                className="h-100 slider__btn-prev"
+                onClick={(e) => {
+                    e.preventDefault();
+                    slidePrev();
+                }}
+            >
+                {"<"}
+            </button>
+        </div>
+    );
 }
+
 export default SliderComponent;

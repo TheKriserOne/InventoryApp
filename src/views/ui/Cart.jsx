@@ -42,14 +42,28 @@ const Cart = () => {
         return cartDetails.reduce((acc, cartDetail) => acc + cartDetail.price, 0);
     };
 
-    return (<Container className="mt-5">
+    return (<Container className="mt-5 flex-lg-column">
             <h1 className="text-center mb-4">
                 Your Cart
             </h1>
-            <Row>
-                <Col md="8">
-                    <Row className="justify-content-center">
-                        <div className={"d-flex flex-column"}>
+                    <Card className="sticky-top w-100" style={{top: "20px"}}>
+                        <CardBody>
+                            <h4 className="text-center">Order Summary</h4>
+                            <div className="d-flex justify-content-between">
+                                <span>Total Items:</span>
+                                <span>{cart.length}</span>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <span>Total Price:</span>
+                                <span>{"$" + calculateTotal()}</span>
+                            </div>
+                            <Button color="primary" size="lg" block className="mt-4">
+                                Place Order
+                            </Button>
+                        </CardBody>
+                    </Card>
+
+                        <div className={"d-flex cart flex-column"}>
                             {loading ? (
                                 <h4 className="text-center">Loading...</h4>
                             ) : cartDetails.length > 0 ? (
@@ -57,18 +71,19 @@ const Cart = () => {
                                     return (
                                         <Card
                                             key={index}
-                                            className="flex-row align-items-start"
-                                            style={{width: "100%", border: "1px solid gray"}}
+                                            className="card-mobile flex-lg-row align-items-start"
+                                            style={{ border: "1px solid gray"}}
                                         >
                                             <CardImg
                                                 top
                                                 onClick={() => navigate(`/store/${cartDetail.id}`)}
                                                 src={cartDetail.images[0]}
                                                 alt={cartDetail.auto_part}
-                                                style={{width: "250px", height: "15rem"}}
+                                                style={{aspectRatio:"1/1", objectFit: "cover", width:"17.9rem"}}
+
                                             />
                                             <CardHeader>
-                                                <h5 className={""}>{cartDetail.auto_part}</h5>
+                                                <h5>{cartDetail.auto_part}</h5>
                                                 <Badge color="secondary">
                                                     {cartDetail.price + " " + cartDetail.currency}
                                                 </Badge>
@@ -90,27 +105,7 @@ const Cart = () => {
                                 <h4 className="text-center">Your cart is empty.</h4>
                             )}
                         </div>
-                    </Row>
-                </Col>
-                <Col md="4">
-                    <Card className="sticky-top" style={{top: "20px"}}>
-                        <CardBody>
-                            <h4 className="text-center">Order Summary</h4>
-                            <div className="d-flex justify-content-between">
-                                <span>Total Items:</span>
-                                <span>{cart.length}</span>
-                            </div>
-                            <div className="d-flex justify-content-between">
-                                <span>Total Price:</span>
-                                <span>{"$" + calculateTotal()}</span>
-                            </div>
-                            <Button color="primary" size="lg" block className="mt-4">
-                                Place Order
-                            </Button>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+
         </Container>
     );
 };

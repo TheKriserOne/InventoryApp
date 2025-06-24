@@ -22,44 +22,27 @@ const Header = () => {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const { currentUser, logout } = useAuth();
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const Handletoggle = () => {
-    setIsOpen(!isOpen);
-  };
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
+    setIsOpen(!isOpen);
   };
   return (
-    <Navbar color="primary" dark expand="md" className={"sticky-top"} style={{zIndex: 1030}}>
-      <div className="d-flex align-items-center">
-        <div className="d-lg-block d-none me-5 pe-3">
+    <Navbar color="primary" dark>
+      <div className="d-flex">
+        <div className="d-block">
           <Logo />
         </div>
         <NavbarBrand href="/"/>
         <Button
           color="primary"
-          className=" d-lg-none"
-          onClick={() => showMobilemenu()}
+          onClick={showMobilemenu}
         >
           <i className="bi bi-list"></i>
         </Button>
       </div>
-      <div className="hstack gap-2">
-        <Button
-          color="primary"
-          size="sm"
-          className="d-sm-block d-md-none"
-          onClick={Handletoggle}
-        >
-          {isOpen ? (
-            <i className="bi bi-x"></i>
-          ) : (
-            <i className="bi bi-three-dots-vertical"></i>
-          )}
-        </Button>
-      </div>
-  <div className={"d-flex justify-content-endd"}>
+  <div className={"d-flex justify-content-end"}>
       <Button onClick={() => navigate("/cart")} color={"transparent"} className={"fs-2 bi-cart-check"}/>
-    {currentUser ? <Collapse navbar isOpen={isOpen}>
+    {currentUser ?
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle color="transparent">
             <img
@@ -74,8 +57,7 @@ const Header = () => {
             <DropdownItem>Edit Profile</DropdownItem>
             <DropdownItem onClick={logout}>Logout</DropdownItem>
           </DropdownMenu>
-        </Dropdown>
-      </Collapse> : <Button onClick={() => navigate("/login")} color={"transparent"} className={"fs-2 bi-person-circle"}/>}
+        </Dropdown> : <Button onClick={() => navigate("/login")} color={"transparent"} className={"fs-2 bi-person-circle"}/>}
   </div>
     </Navbar>
   );

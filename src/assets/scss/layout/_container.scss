@@ -2,6 +2,17 @@
   display: flex;
   min-height: 100vh;
 }
+@media (max-width: 992px) {
+    .pageWrapper {
+        flex-direction: column;
+    }
+  .cart {
+    align-items: center;
+  }
+  .card-mobile {
+    width:18rem;
+  }
+}
 .contentArea {
   overflow-x:auto;
   width: 100%;

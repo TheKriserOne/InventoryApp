@@ -5,17 +5,14 @@ import {useState} from "react";
 import {useAuth} from "../contexts/AuthContext.jsx";
 
 const Sidebar = () => {
-    const showMobilemenu = () => {
-        document.getElementById("sidebarArea").classList.toggle("showSidebar");
-    };
     let location = useLocation();
-    const [collapse, setCollapse] = useState(location.pathname.includes("/inventory") ? true : false);
+    const [collapse, setCollapse] = useState(location.pathname.includes("/inventory"));
     const toggle = () => setCollapse(!collapse);
     const {currentUser} = useAuth()
 
     return (
-            <div className="p-3 mt-2 border-2">
-                <Nav vertical className="sidebarNav">
+            <div className="p-3 mt-2 h-100">
+                <Nav vertical>
                     {currentUser && <NavItem className="sidenav-bg">
                         <Link onClick={toggle} className={collapse ? "dropdown nav-link py-3"
                             : "nav-link text-secondary py-3"}>

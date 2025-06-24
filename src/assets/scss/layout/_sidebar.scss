@@ -1,33 +1,47 @@
-.sidebarArea {
-  flex-shrink: 0;
-  width: $sidebarWidth;
-  background-color: $sidebarColor;
-  .sidenav-bg:hover {
-    background-color: $gray-100;
-    border-radius: $border-radius;
-  }
-  .sidenav-bg .active {
-    background-color: $info;
-    border-radius: $border-radius;
-    color: white;
-  }
-  .dropdown {
-    background-color: $secondary;
-    border-radius: $border-radius;
-    color: white;
-  }
-}
-@include media-breakpoint-down(lg) {
+
   .sidebarArea {
-    position: fixed;
+    position: sticky;
     height: 100%;
     overflow: auto;
     top: 0;
-    z-index: 1;
     margin-left: -$sidebarWidth;
     transition: 0.2s ease-in;
     &.showSidebar {
       margin-left: 0px;
     }
+    flex-shrink: 0;
+    width: $sidebarWidth;
+    background-color: $sidebarColor;
+    .sidenav-bg:hover {
+      background-color: $gray-100;
+      border-radius: $border-radius;
+    }
+    .sidenav-bg .active {
+      background-color: $info;
+      border-radius: $border-radius;
+      color: white;
+    }
+    .dropdown {
+      background-color: $secondary;
+      border-radius: $border-radius;
+      color: white;
+    }
   }
-}
+  @media (max-width: 992px) {
+    .sidebarArea {
+      position:relative;
+      left: 0;
+      //top: 100px;
+      bottom: auto;
+      width: 100%;
+      height: 0;
+      margin-left: 0;
+      overflow: hidden;
+      transition: height 0.2s ease-in;
+      z-index: 1050;
+
+      &.showSidebar {
+        height: auto;
+      }
+    }
+  }
