@@ -1,9 +1,10 @@
-import { Button, CardText, Col, Input, Row, Table } from "reactstrap";
+import { Button, Input, Table } from "reactstrap";
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 const DataTable = ({ row, data, onDelete }) => {
   const [selectedRows, setSelectedRows] = useState([]);
-
+  const navigate = useNavigate();
   const allSelected = selectedRows.length === data.length;
   const isIndeterminate = selectedRows.length > 0 && !allSelected;
 
@@ -62,16 +63,19 @@ const DataTable = ({ row, data, onDelete }) => {
         </thead>
         <tbody>
           {data.map((rowData) => (
-            <tr key={rowData.id}>
+            <tr key={rowData.id} onClick={()=> navigate(`/inventory/edit/${rowData.id}`)}>
               <td style={{ width: "34px" }}>
                 <Input
                   type="checkbox"
                   checked={selectedRows.includes(rowData.id)}
-                  onChange={() => handleRowSelect(rowData.id)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleRowSelect(rowData.id)
+                  }}
                 />
               </td>
-              {row.map((key) => (
-                <td key={key}>{rowData[key]}</td>
+             {row.map((key) => (
+                <td key={key} >{rowData[key]}</td>
               ))}
             </tr>
           ))}

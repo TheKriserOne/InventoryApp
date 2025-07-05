@@ -33,7 +33,7 @@ const keys = [
 
 const Inventory = () => {
     const [table, setTable] = useState([]);
-    const [select, setSelect] = useState("id");
+    const [select, setSelect] = useState("make");
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();

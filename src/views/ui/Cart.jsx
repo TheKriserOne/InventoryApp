@@ -39,7 +39,7 @@ const Cart = () => {
     }, [cart]);
 
     const calculateTotal = () => {
-        return cartDetails.reduce((acc, cartDetail) => acc + cartDetail.price, 0);
+        return cartDetails.reduce((acc, cartDetail) => parseFloat(acc) + parseFloat(cartDetail.price), 0);
     };
 
     return (<Container className="mt-5 flex-lg-column">

@@ -15,6 +15,7 @@ const Cart = lazy(() => import("../views/ui/Cart.jsx"));
 const Login = lazy(() => import("../views/ui/Login.jsx"));
 const PrivateRoute = lazy(() => import("./PrivateRoute.jsx"));
 const AddInventory = lazy(() => import("../views/ui/AddInventory.jsx"));
+const EditInventory = lazy(() => import("../views/ui/EditInventory.jsx"));
 /*****Routes******/
 
 
@@ -29,6 +30,7 @@ const ThemeRoutes = () => {
                     <Route element={<PrivateRoute/>}>
                         <Route path="inventory" element={<Inventory/>}/>
                         <Route path="inventory/add" element={<AddInventory/>}/>
+                        <Route path="inventory/edit/:id" element={<EditInventory/>}/>
                     </Route>
                     <Route path="cart" element={<Cart/>}/>
                 </Route>

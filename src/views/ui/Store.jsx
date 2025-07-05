@@ -27,6 +27,7 @@ const Store = () => {
         if (!search) {
             return data;
         }
+        setCurrentPage(1); // Reset to first page on new search
         return data.filter((item) =>
             item.auto_part.toLowerCase().includes(search.toLowerCase())
         );
